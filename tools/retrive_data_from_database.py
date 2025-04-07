@@ -20,7 +20,7 @@ execute_query = QuerySQLDatabaseTool(db=db)
 # Initialize Google's Gemini model for natural language to SQL conversion
 llm = ChatGoogleGenerativeAI(
     model="gemini-1.5-flash",
-    api_key=os.environ["API_KEY"], 
+    google_api_key=os.environ["API_KEY"], 
     temperature=0.5  # Controls randomness in responses
 )
 
@@ -43,6 +43,10 @@ def retrive_data_from_database(query):
     Returns:
         list:The data retrived from the database.
     """
+    print('##################################################')
+    print('using database agent')
+    print('##################################################')
+
     # Convert natural language query to SQL using the LLM chain
     sql_response = sql_chain.invoke({"question": query})
     

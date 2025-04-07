@@ -9,7 +9,7 @@ load_dotenv()
 
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",
-    api_key=os.environ["API_KEY"],  # API key for authentication
+    google_api_key=os.environ.get("API_KEY"),  # API key for authentication
 )
 
 

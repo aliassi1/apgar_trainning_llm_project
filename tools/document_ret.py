@@ -15,7 +15,7 @@ load_dotenv()
 # Initialize Google's embedding model for converting text to vectors
 embeddings = GoogleGenerativeAIEmbeddings(
         model="models/embedding-001",
-        api_key=os.environ["API_KEY"],  
+        google_api_key=os.environ["API_KEY"],  
     )
 
 # Set up Pinecone vector store with the embeddings model
@@ -24,7 +24,7 @@ vector_store = PineconeVectorStore(index=index, embedding=embeddings)
 # Initialize Google's Gemini model for question answering
 llm = ChatGoogleGenerativeAI(
             model="gemini-1.5-flash",
-            api_key=os.environ["API_KEY"], 
+            google_api_key=os.environ["API_KEY"], 
             temperature=0.5  # Controls randomness in responses
         )
 
@@ -48,7 +48,11 @@ def document_ret(query: str) -> str:
     Returns:
         str: The data retrieved from the documentation vector store with the source document.
     """
-   
+    print('##################################################')
+
+    print('using RAG agent')
+    print('##################################################')
+
     # Get response from the QA chain
     response = qa_chain.invoke({"query": query})
     
